@@ -63,15 +63,9 @@ class SpamCrawlerPlus {
 		if (in_array ( $this->ip, $this->whitelist () )) {
 			return false;
 		}
-		$options = array (
-				'http' => array (
-						'user_agent' => 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3' 
-				) 
-		);
-		$context = stream_context_create ( $options );
-		$response = file_get_contents ( "http://www.stopforumspam.com/api?ip=" . $this->ip . "", false, $context );
-		$api = "http://www.stopforumspam.com/api?ip=" . $this->ip . "";
-		$jsonFile = file_get_contents ( $api );
+		
+		$response = file_get_contents ( "http://www.stopforumspam.com/api?ip=" . $this->ip . "");
+		$jsonFile = file_get_contents ( $response );
 		
 		$json = json_decode ( $jsonFile, true );
 		
