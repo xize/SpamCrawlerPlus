@@ -75,7 +75,7 @@ class SpamCrawlerPlus {
 		} else {
 			//search if they are possible a dedicated server, even though this could be spoofed easily.
 			$hostname = gethostbyaddr ( $this->ip );
-			if (strpos ( $hostname, "ovh.com" ) || strpos ( $hostname, "ovh.net" ) || strpos ( $hostname, "vps" ) || strpos ( $hostname, "mail.ru" ) || strpos ( $hostname, "ovh.com" ) || strpos ( $hostname, "softlayer" ) || strpos ( $hostname, "vpn" ) || strpos ( $hostname, "dedicated" ) || strpos($hostname, "quadranet.com")) {
+			if (strpos ( $hostname, "ovh.com" ) || strpos ( $hostname, "ovh.net" ) || strpos ( $hostname, "vps" ) || strpos ( $hostname, "mail.ru" ) || strpos ( $hostname, "softlayer" ) || strpos ( $hostname, "vpn" ) || strpos ( $hostname, "dedicated" ) || strpos($hostname, "quadranet.com")) {
 				return true;
 			}
 		}
