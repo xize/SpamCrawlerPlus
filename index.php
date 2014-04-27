@@ -17,7 +17,7 @@
  */
 
 class SpamCrawlerPlus {
-	private $ip;
+	private final $ip;
 	
 	/**
 	 *
