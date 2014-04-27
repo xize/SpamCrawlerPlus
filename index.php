@@ -64,8 +64,8 @@ class SpamCrawlerPlus {
 			return false;
 		}
 		
-		$response = file_get_contents ( "http://www.stopforumspam.com/api?ip=" . $this->ip . "");
-		$jsonFile = file_get_contents ( $response );
+		$api = "http://www.stopforumspam.com/api?ip=" . $this->ip . "";
+		$jsonFile = file_get_contents ( $api );
 		
 		$json = json_decode ( $jsonFile, true );
 		
