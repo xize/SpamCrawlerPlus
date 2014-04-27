@@ -23,24 +23,44 @@ class SpamCrawlerPlus {
 	/**
 	 *
 	 * @author xize
+	 * @param $ip - the ip adress
+	 */
+	public function __construct($ip) {
+		$this->ip = $ip;
+	}
+	
+	/**
+	 *
+	 * @author xize
 	 * @param add here your hardcoded ip adresses!, this allow them to visit your site.
 	 * @return Array
 	 */
 	private function whitelist() {
 		$array = array (
 				"192.168.0.1",
-				"192.168.0.2" 
+				"192.168.0.2"
 		);
 		return $array;
 	}
 	
 	/**
-	 *
 	 * @author xize
-	 * @param $ip - the ip adress
+	 * @param returns the list of all disallowed hosting.
+	 * @return Array
 	 */
-	public function __construct($ip) {
-		$this->ip = $ip;
+	protected final function getDisallowedHostnames() {
+		$args = array(
+			"ovh.com",
+			"ovh.net",
+			"vps",	
+			"mail.ru",
+			"softlayer",
+			"vpn",
+			"dedicated",
+			"quadranet.com",		
+			"steephost.net"
+		);
+		return $args;
 	}
 	
 	/**
@@ -75,8 +95,10 @@ class SpamCrawlerPlus {
 		} else {
 			//search if they are possible a dedicated server, even though this could be spoofed easily.
 			$hostname = gethostbyaddr ( $this->ip );
-			if (strpos ( $hostname, "ovh.com" ) || strpos ( $hostname, "ovh.net" ) || strpos ( $hostname, "vps" ) || strpos ( $hostname, "mail.ru" ) || strpos ( $hostname, "softlayer" ) || strpos ( $hostname, "vpn" ) || strpos ( $hostname, "dedicated" ) || strpos($hostname, "quadranet.com") || strpos(strtolower($hostname), "steephost.net")) {
-				return true;
+			foreach($this->getDisallowedHostnames() as $key) {
+				if(strpos(strtolower($hostname), $key)) {
+					return true;
+				}
 			}
 		}
 		return false;
